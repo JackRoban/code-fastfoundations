@@ -116,22 +116,35 @@ def useful_path_operations():
         print(f"\t* {path_object.name:<30} ==> {path_object.parent}")
 
 
+def reading_socrates():
+    import pathlib
+    my_path = pathlib.Path("day2/dir1/dir2/socrates.txt")
+    with my_path.open() as f:
+        print()
+
+
+def read_hidden():
+    import pathlib
+    my_path = pathlib.Path("~/") #show hidden files
+    for fn in my_path.expanduser().glob(".*"):
+        print(fn)
+
+
 def main():
     # opening_and_closing_files()
     # reading_file_contents()
-    iterating_over_file_contents()
-    reading_wagata()
-    print_number_of_rows()
+    # iterating_over_file_contents()
+    # reading_wagata()
+    # print_number_of_rows()
     # navigating_files()
     # # working_with_paths()
     # # testing_paths()
     # useful_path_operations()
+    # reading_socrates()
+    read_hidden()
     return 0
 
 
 if __name__ == '__main__':
     sys.exit(main())
-
-
-########### Task: Examine the output of the iterating_over_file_contents() function.
 

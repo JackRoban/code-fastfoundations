@@ -5,13 +5,13 @@ def working_with_gzip_files():
     import gzip
     # read
     with gzip.open(
-            "/Users/paulkorir/PycharmProjects/code-fastfoundations/day2/dir1/dir3/dir4/our_deepest_fear.txt.gz"
+            "~/day2/dir1/dir3/dir4/our_deepest_fear.txt.gz"
     ) as g:
         text = g.read()
         print(type(text))
     # write
     with gzip.open(
-            "/Users/paulkorir/PycharmProjects/code-fastfoundations/day2/dir1/dir3/dir4/youth.txt.gz",
+            "~/day2/dir1/dir3/dir4/youth.txt.gz",
             'wb'
     ) as g:  # a binary file
         # g.write("It takes a very long time to become young.\n") # TypeError
@@ -19,7 +19,7 @@ def working_with_gzip_files():
         g.write("It takes a very long time to become young.\n".encode('utf-8'))
         g.write("― Pablo Picasso\n".encode('utf-8'))
     with gzip.open(
-            "/Users/paulkorir/PycharmProjects/code-fastfoundations/day2/dir1/dir3/dir4/youth.txt.gz"
+            "~/day2/dir1/dir3/dir4/youth.txt.gz"
     ) as g:
         print(g.read())
 
@@ -44,6 +44,7 @@ def read_json_file():
 
 def working_with_binary_data():
     import random
+    import zlib
     import struct
     random.seed(1234)  # seeding the RNG
     data = [random.random() for _ in range(10)]  # get <count> rands
@@ -53,11 +54,11 @@ def working_with_binary_data():
     data2 = struct.unpack(f'<10f', bin_data)
     print(f"{data2 = }")
 
-    # str_data = ','.join(map(str, data))  # convert numbers to strings with commas between
-    # print(f"str_data:     [{len(str_data)} bytes]\n\t* {str_data[:100]}...")
-    # print(f"bin_data:     [{len(bin_data)} bytes]\n\t* {bin_data[:100]}...")
-    # zip_bin_data = zlib.compress(bin_data)
-    # print(f"zip_bin_data: [{len(zip_bin_data)} bytes]\n\t* {zip_bin_data[:100]}...")
+    str_data = ','.join(map(str, data))  # convert numbers to strings with commas between
+    print(f"str_data:     [{len(str_data)} bytes]\n\t* {str_data[:100]}...")
+    print(f"bin_data:     [{len(bin_data)} bytes]\n\t* {bin_data[:100]}...")
+    zip_bin_data = zlib.compress(bin_data)
+    print(f"zip_bin_data: [{len(zip_bin_data)} bytes]\n\t* {zip_bin_data[:100]}...")
 
 
 def compressing_binary_data():
@@ -76,11 +77,51 @@ def compressing_binary_data():
     print(f"{data2 = }")
 
 
+def convert_gtf_to_gz():
+    import gzip
+    with open("Homo_sapiens.GRCh38.107.abinitio.gtf") as f, gzip.open("Homo_sapiens.GRCh38.107.abinitio.gtf.gz", "w") as g:
+        for row in f:
+            g.write(row.encode("utf-8"))
+
+    with gzip.open("Homo_sapiens.GRCh38.107.abinitio.gtf.gz") as g:
+        for row in g:
+            print(row)
+
+    import pathlib
+    uncompressed_path = pathlib.Path("Homo_sapiens.GRCh38.107.shuffled_and_truncated.gtf")
+    print(f"{uncompressed_path.stat() = }")
+    print(f"{uncompressed_path.stat().st_size = }")
+    compressed_path = pathlib.Path("Homo_sapiens.GRCh38.107.abinitio.gtf.gz")
+    print(f"{compressed_path.stat() = }")
+    print(f"{compressed_path.stat().st_size = }")
+
+
+def binary_float_and_ints():
+    import struct
+    import random
+    int_data = [random.random(0, 200) for _ in range(1000)]  # get <count> rands
+    float_data = [random.random() for _ in range(1000)]  # get <count> rands
+    bin_data = struct.pack("<1000i", *int_data)
+    bin_data = struct.pack("<1000f", *float_data)
+    return bin_data
+
+
+def revert_to_actual_from_binary(bin_data):
+    import struct
+    int_data = struct.unpack("<1000i", bin_data[:4000])
+    print(f"{int_data[-10:]}")
+    float_data = struct.unpack("<1000f", bin_data[:4000])
+    print(f"{float_data[-10:]}")
+
+
 def main():
     # working_with_gzip_files()
-    # read_json_file()
-    working_with_binary_data()
-    compressing_binary_data()
+    # # read_json_file()
+    # working_with_binary_data()
+    # compressing_binary_data()
+    # convert_gtf_to_gz()
+    binary_float_and_ints()
+    revert_to_actual_from_binary()
     return 0
 
 

@@ -35,8 +35,17 @@ def iterating_over_file_contents(): #prints all in a file
         for row in f:
             print(row.strip()) #strip before prinintg to remove spaces between lines
 
-def reading_wagata:
-    with open ()
+def reading_wagata():
+    with open ("wagata.txt", encoding = "utf-8") as f:
+        for row in f:
+            print()
+
+
+def print_number_of_rows(filename, lines = 10):
+    with open(filename) as f:
+        lines_read = f.readlines()[:lines]
+        print(lines_read)
+        print(len(lines_read))
 
 
 def navigating_files():

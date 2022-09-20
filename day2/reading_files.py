@@ -36,13 +36,13 @@ def iterating_over_file_contents(): #prints all in a file
             print(row.strip()) #strip before prinintg to remove spaces between lines
 
 def reading_wagata():
-    with open ("wagata.txt", encoding = "utf-8") as f:
+    with open("wagata.txt", encoding="utf-8") as f:
         for row in f:
-            print()
+            print(row)
 
 
-def print_number_of_rows(filename, lines = 10):
-    with open(filename) as f:
+def print_number_of_rows(lines=10):
+    with open("paradoxical.txt") as f:
         lines_read = f.readlines()[:lines]
         print(lines_read)
         print(len(lines_read))
@@ -120,6 +120,8 @@ def main():
     # opening_and_closing_files()
     # reading_file_contents()
     iterating_over_file_contents()
+    reading_wagata()
+    print_number_of_rows()
     # navigating_files()
     # # working_with_paths()
     # # testing_paths()

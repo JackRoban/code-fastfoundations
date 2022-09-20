@@ -30,6 +30,15 @@ def reading_file_contents():
         print(f"{ f.readlines() = }")
 
 
+def iterating_over_file_contents(): #prints all in a file
+    with open("think_different.txt") as f:
+        for row in f:
+            print(row.strip()) #strip before prinintg to remove spaces between lines
+
+def reading_wagata:
+    with open ()
+
+
 def navigating_files():
     with open("butterfly.txt") as f:
         # first let's read everything
@@ -101,13 +110,17 @@ def useful_path_operations():
 def main():
     # opening_and_closing_files()
     # reading_file_contents()
-    # iterating_over_file_contents()
+    iterating_over_file_contents()
     # navigating_files()
-    # working_with_paths()
-    # testing_paths()
-    useful_path_operations()
+    # # working_with_paths()
+    # # testing_paths()
+    # useful_path_operations()
     return 0
 
 
 if __name__ == '__main__':
     sys.exit(main())
+
+
+########### Task: Examine the output of the iterating_over_file_contents() function.
+

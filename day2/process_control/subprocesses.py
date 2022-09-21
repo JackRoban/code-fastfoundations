@@ -8,7 +8,7 @@ import time
 
 def simplest_way():
     process = subprocess.run(
-        shlex.split("sleep 10")
+        shlex.split("sleep 10") #shell lexer that passes and breaks up parts of a string with different functions.
     )
     print(f"{process = }")
     print(f"{process.args = }")
@@ -17,12 +17,19 @@ def simplest_way():
     print(f"{process.stderr = }")
 
 
+def print_results():
+    process = subprocess.run(
+        shlex.split("sleep 10") #shell lexer that passes and breaks up parts of a string with different functions.
+    )
+    print(f"{process = } (find.. - name '*paradoxical.*' -type f)")
+
+
 def create_subprocess():
     # https://docs.python.org/3/library/subprocess.html#popen-constructor
     print(f"{os.getpid() = }")  # the process id for this module's process
     process = subprocess.Popen(
         shlex.split(
-            "python /Users/paulkorir/PycharmProjects/code-fastfoundations/day2/"
+            "bash pwd python /Users/paulkorir/PycharmProjects/code-fastfoundations/day2/"
             "process_control/simple_task.py"
         ),
         stdin=subprocess.PIPE,  # necessary to communicate the input value
@@ -49,7 +56,7 @@ def stop_subprocess():
     print(f"{process.poll() = } (None = 'still running')")
     time.sleep(5)
     print(f"That's it! I've had it!")
-    process.kill()
+    process.kill() #kill a process
     stdout, stderr = process.communicate()
     print(f"{stdout = }")
     print(f"{stderr = }")
@@ -57,9 +64,10 @@ def stop_subprocess():
 
 
 def main():
-    simplest_way()
+    # simplest_way()
     # create_subprocess()
     # stop_subprocess()
+    print_results()
     return 0
 
 

@@ -9,6 +9,8 @@ class Circle:
     def __init__(self, radius, position=(0, 0)):
         self.radius = radius  # each circle will have a particular radius
         self.position = position
+        self.diameter = 2*radius
+        self.area = math.pi * radius ** 2
 
     def __str__(self):  # Python special methods
         return f"I am a circle of size {self.radius}{self.units} located at {self.position}."
@@ -29,6 +31,8 @@ def bounding_box(circle):
 def main():
     small_circle = Circle(10)
     big_circle = Circle(50)
+    small_circle.position = (1, 2)
+
 
     print(small_circle)
     print(big_circle)
@@ -43,11 +47,18 @@ def main():
     big_circle.units = 'hm'  # only change for the big_circle instance
 
     print(small_circle)
+
+    print(small_circle.diameter)
+    print(small_circle.area)
+
     print(big_circle)
 
-    canvas = Canvas(1200, 780)
-    canvas.mystery_method()
-    turtle.done()
+    print(big_circle.diameter)
+    print(big_circle.area)
+
+    # canvas = canvas(1200, 780)
+    # canvas.mystery_method()
+    # turtle.done()
 
     return os.EX_OK
 
